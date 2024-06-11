@@ -36,7 +36,7 @@ Movie
 
 /api/movies/:slug/reviews/:id
 Review
-    movie:MovieId;
+    movie:MovieId;[parent referencing]
     email: string;
     rating: number;
     comment: string;   

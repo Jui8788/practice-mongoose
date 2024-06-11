@@ -24,4 +24,4 @@ const reviewSchema = new Schema<TReview>({
   },
 });
 
-export const review = model<TReview>("Review", reviewSchema);
+export const Review = model<TReview>("Review", reviewSchema);
