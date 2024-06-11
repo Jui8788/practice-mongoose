@@ -1,24 +1,24 @@
 import { Schema, model } from "mongoose";
-import { TMovie, TMovieMethods, TMovieModel, TReview } from "./movie.interface";
+import { TMovie, TMovieMethods, TMovieModel } from "./movie.interface";
 import { format } from "date-fns";
 import slugify from "slugify";
 
-const reviewSchema = new Schema<TReview, TMovieModel, TMovieMethods>({
-  email: {
-    type: String,
-    required: true,
-  },
+// const reviewSchema = new Schema<TReview,TMovieModel, TMovieMethods>({
+//   email: {
+//     type: String,
+//     required: true,
+//   },
 
-  rating: {
-    type: Number,
-    required: true,
-  },
+//   rating: {
+//     type: Number,
+//     required: true,
+//   },
 
-  comment: {
-    type: String,
-    required: true,
-  },
-});
+//   comment: {
+//     type: String,
+//     required: true,
+//   },
+// });
 
 const movieSchema = new Schema<TMovie>({
   title: {
@@ -40,10 +40,6 @@ const movieSchema = new Schema<TMovie>({
     required: [true, "Genre is required"],
   },
 
-  reviews: {
-    type: [reviewSchema],
-  },
-
   slug: {
     type: String,
   },
@@ -54,6 +50,11 @@ const movieSchema = new Schema<TMovie>({
   },
 
   viewCount: {
+    type: Number,
+    default: 0,
+  },
+
+  totalRating: {
     type: Number,
     default: 0,
   },
