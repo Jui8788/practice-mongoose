@@ -5,7 +5,7 @@ import { Review } from "./review.model";
 const addReviewIntoDB = async (
   slug: string,
   reviewData: Partial<TReview>
-): Promise<TReview> => {
+): Promise<TReview | any> => {
   const movie = await Movie.findOne({ slug });
 
   if (!movie) {
@@ -30,9 +30,10 @@ const addReviewIntoDB = async (
   } catch (error) {
     console.log(error);
     await session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
   }
-
-  session.endSession();
 };
 
 const getAllReviewsFromDB = () => {};

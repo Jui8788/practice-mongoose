@@ -1,25 +1,18 @@
 import { Request, Response } from "express";
 import { ReviewServices } from "./review.service";
+import { catchAsync } from "../../utils/catchAsync";
 
-const addReview = async (req: Request, res: Response) => {
-  try {
-    const { slug } = req.params;
-    const reviewData = req.body;
-    const result = await ReviewServices.addReviewIntoDB(slug, reviewData);
+const addReview = catchAsync(async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  const reviewData = req.body;
+  const result = await ReviewServices.addReviewIntoDB(slug, reviewData);
 
-    res.status(200).json({
-      success: true,
-      message: "Review is created successfully",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Something went wrong",
-      error: error,
-    });
-  }
-};
+  res.status(200).json({
+    success: true,
+    message: "Review is created successfully",
+    data: result,
+  });
+});
 
 // const getAllReviews = async (req: Request, res: Response) => {
 //   try {
