@@ -13,7 +13,7 @@ const createMovie = catchAsync(async (req, res, next) => {
 });
 
 const getAllMovies = catchAsync(async (req, res, next) => {
-  const result = await MovieServices.getAllMoviesFromDB();
+  const result = await MovieServices.getAllMoviesFromDB(req.query);
 
   res.status(200).json({
     success: true,

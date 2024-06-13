@@ -14,12 +14,7 @@ export const catchAsync = (fn: RequestHandler) => {
     //     }
 
     Promise.resolve(fn(req, res, next)).catch((error) => {
-      console.log(error);
-      res.status(500).json({
-        success: false,
-        message: "Could not fetch random movie!",
-        error: error,
-      });
+      next(error);
     });
   };
 };

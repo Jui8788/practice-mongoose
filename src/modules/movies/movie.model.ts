@@ -3,32 +3,17 @@ import { TMovie, TMovieMethods, TMovieModel } from "./movie.interface";
 import { format } from "date-fns";
 import slugify from "slugify";
 
-// const reviewSchema = new Schema<TReview,TMovieModel, TMovieMethods>({
-//   email: {
-//     type: String,
-//     required: true,
-//   },
-
-//   rating: {
-//     type: Number,
-//     required: true,
-//   },
-
-//   comment: {
-//     type: String,
-//     required: true,
-//   },
-// });
-
 const movieSchema = new Schema<TMovie>({
   title: {
     type: String,
     required: [true, "Title is required"],
+    unique: true,
   },
 
   description: {
     type: String,
     required: [true, "Description is required"],
+    unique: true,
   },
 
   releaseDate: {

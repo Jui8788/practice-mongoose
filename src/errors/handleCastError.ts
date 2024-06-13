@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
-import { TErrorSources } from "../interface/error.interface";
+import {
+  TErrorSources,
+  TGenericErrorResponse,
+} from "../interface/error.interface";
 
-export const handleCastError = (err: mongoose.Error.CastError) => {
+export const handleCastError = (
+  err: mongoose.Error.CastError
+): TGenericErrorResponse => {
   const errorSources: TErrorSources = [
     {
       path: err.path,
@@ -9,8 +14,11 @@ export const handleCastError = (err: mongoose.Error.CastError) => {
     },
   ];
 
+  const statusCode = 400;
+
   return {
-    message: "Cast Error",
+    statusCode,
+    message: "Invalid ID",
     errorSources,
   };
 };
