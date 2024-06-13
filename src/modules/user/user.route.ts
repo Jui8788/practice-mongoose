@@ -23,3 +23,8 @@ router.put(
 );
 
 export const UserRoutes = router;
+
+//login /api/auth/login
+//register /api/users/create-student : /api/auth/register
+//forgot password /api/auth/forgot-password
+//refresh token /api/auth/refresh-token
