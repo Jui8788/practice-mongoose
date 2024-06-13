@@ -1,62 +1,52 @@
-import { Request, Response } from "express";
 import { MovieServices } from "./movie.service";
+import { catchAsync } from "../../utils/catchAsync";
 
-const createMovie = async (req: Request, res: Response) => {
-  try {
-    const movieData = req.body;
-    const result = await MovieServices.createMovieIntoDB(movieData);
-    res.status(200).json({
-      success: true,
-      message: "Movie is created successfully",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Something went wrong",
-      error: error,
-    });
-  }
-};
+const createMovie = catchAsync(async (req, res, next) => {
+  const movieData = req.body;
+  const result = await MovieServices.createMovieIntoDB(movieData);
 
-const getAllMovies = async (req: Request, res: Response) => {
-  try {
-    const result = await MovieServices.getAllMoviesFromDB;
-    res.status(200).json({
-      success: true,
-      message: "Movies are fetched successfully",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Could not fetch movies properly",
-      error: error,
-    });
-  }
-};
+  res.json({
+    success: true,
+    message: "Movie is created successfully !",
+    data: result,
+  });
+});
 
-const getMovieBySlug = async (req: Request, res: Response) => {
-  try {
-    const { slug } = req.params;
-    const result = await MovieServices.getMovieBySlugFromDB(slug);
+const getAllMovies = catchAsync(async (req, res, next) => {
+  const result = await MovieServices.getAllMoviesFromDB();
 
-    res.status(200).json({
-      success: true,
-      message: "Movie is fetched successfully",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Could not fetch movie properly",
-      error: error,
-    });
-  }
-};
+  res.status(200).json({
+    success: true,
+    message: "Movies are fetched successfully !",
+    data: result,
+  });
+});
+
+const getSingleMovie = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const result = await MovieServices.getSingleMovieFromDB(id);
+
+  res.status(200).json({
+    success: true,
+    message: "Movie fetched successfully !",
+    data: result,
+  });
+});
+
+const getMovieBySlug = catchAsync(async (req, res, next) => {
+  const { slug } = req.params;
+  const result = await MovieServices.getMovieBySlugFromDB(slug);
+
+  res.status(200).json({
+    success: true,
+    message: "Movies are fetched successfully !",
+    data: result,
+  });
+});
 
 export const MovieControllers = {
   createMovie,
   getAllMovies,
   getMovieBySlug,
+  getSingleMovie,
 };

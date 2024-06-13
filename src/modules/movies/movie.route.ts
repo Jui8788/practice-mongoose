@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/", MovieControllers.createMovie);
 router.get("/", MovieControllers.getAllMovies);
+router.get("/:id", MovieControllers.getSingleMovie);
 router.get("/:slug", MovieControllers.getMovieBySlug);
 router.post("/:slug/review", ReviewControllers.addReview);
 // router.get("/:slug/reviews", ReviewControllers.getAllReviews);

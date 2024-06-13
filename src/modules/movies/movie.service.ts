@@ -24,6 +24,11 @@ const getAllMoviesFromDB = async () => {
   return result;
 };
 
+const getSingleMovieFromDB = async (id: string) => {
+  const movie = await Movie.findOne({ _id: id });
+  return movie;
+};
+
 const getMovieBySlugFromDB = async (slug: string) => {
   const result = await Movie.findOne({ slug: slug });
   return result;
@@ -32,5 +37,6 @@ const getMovieBySlugFromDB = async (slug: string) => {
 export const MovieServices = {
   createMovieIntoDB,
   getAllMoviesFromDB,
+  getSingleMovieFromDB,
   getMovieBySlugFromDB,
 };
