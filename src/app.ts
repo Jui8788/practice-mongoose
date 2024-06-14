@@ -4,6 +4,7 @@ import { MovieRoutes } from "./modules/movies/movie.route";
 import { notFound } from "./middleware/notFound";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import { UserRoutes } from "./modules/user/user.route";
+import { AuthRoutes } from "./modules/auth/auth.route";
 const app = express();
 
 // parsers
@@ -13,6 +14,7 @@ app.use(cors());
 // application routes
 app.use("/api/movies", MovieRoutes);
 app.use("/api/users", UserRoutes);
+app.use("/api/auth", AuthRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello SuJu");
